@@ -1,0 +1,117 @@
+body,html{
+    width: 90% !important;
+    margin: 0 auto !important;
+}
+#header0{
+   text-align: center;
+    font-family: cursive;
+    font-size: 112%;
+    
+}
+#mandatory-text{
+    color: white;
+    
+}
+
+.btn-primary {
+    color: #fff !important;
+    background-color: #337ab7 !important;
+    border-color: #2e6da4 !important;
+
+}
+.btn-danger {
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+
+.btn {
+   
+   float: right;
+    display: inline-block !important;
+    padding: 10px 12px !important;
+    margin-bottom: 0;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    line-height: 1.42857143 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    vertical-align: middle !important;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    background-image: none !important;
+    border: 1px solid transparent !important;
+    border-radius: 12px !important;
+}
+
+.remove,.remove:visited,.remove:active{
+    text-decoration: none;
+    color: white !important;
+    
+}
+
+
+    table{
+
+        margin-bottom: 20px;
+		border-collapse: collapse;
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+    table, th, td{
+        border: 1px solid #cdcdcd;
+    }
+    table th, table td{
+        padding: 10px;
+        text-align: left;
+    }
+
+
+/*dialog box*/
+.text{
+    font-size: 105%;
+    padding: 10px;
+    font-weight: bold;
+}
+.adjust-width{
+    width: 25% !important;
+    padding: 6px !important;
+    margin-left: 10px !important;
+}
+
+.nav-but{
+    align-items: center;
+    margin: 12px !important;
+/*    width: 100% !important;*/
+}
+.hide{
+    display: none;
+        color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    padding: 10px;
+ width: 55%;
+    margin: 0 auto;
+}
+
+.success-message{
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+.hide-info{
+
+}
+
+.overide-color{
+/*
+    background-color: #cb0b12 !important; 
+    border-color: #FF0f19 !important;
+*/
+}

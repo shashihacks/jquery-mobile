@@ -1,0 +1,228 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv='cache-control' content='no-cache'>
+    <title>jQuery Mobile: City Logs</title>
+    <link rel="stylesheet" href="themes/black.min.css" />
+    <link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+    <div data-role="page" data-theme="c" id="homepage">
+        <div data-role="header" data-position="inline">
+            <h1>City Logs</h1> </div>
+        <div data-role="content" data-theme="a">
+            <ul data-role="listview" id="citynames">
+                <ul data-role="listview">
+                    <li onclick="city('Perth')"><a href="#formpage">Perth</a></li>
+                    <li onclick="city('Brisbane')"><a href="#formpage">Brisbane</a></li>
+                    <li onclick="city('Sydney')"><a href="#formpage">Sydney</a></li>
+                    <li onclick="city('Melbourne')"><a href="#formpage">Melbourne</a></li>
+                    <li onclick="city('Adelaide')"><a href="#formpage">Adelaide</a></li>
+                </ul>
+            </ul>
+        </div>
+        
+        <div data-role="footer">
+            <h2>&copy; CQUniversity copyrighted 2018</h2>
+        </div>
+    </div>
+    <div data-role="page" data-theme="b" id="formpage" class="overide-color">
+<!--
+        <div data-role="header0" data-position="inline" id="header0">
+            <h1>Input Form</h1> </div>
+-->
+
+<!--        <button onclick="test()">ss</button>-->
+        <div data-role="header">
+            <div class="ui-grid-b" style="text-align: center">
+                <div class="ui-block-a">
+                    <button id="clears" onclick="clearData()"> Clear </button>
+                </div>
+                <div class="ui-block-b">
+                    <button id="cityname"></button>
+                </div>
+                <div class="ui-block-c">
+                    <a href="#logspage" class="logs">
+                        <button id="showLogs" onclick="showLogs()"> Show Logs </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div data-role="main" class="ui-content">
+            
+     
+            
+            
+            
+            <fieldset>
+                <div data-role="fieldcontain">
+                    <label for="contact">Contact :<sup style="color: orangered">*</sup></label>
+                    <input type="text" value="" name="contact" required id="contactnumber" /> </div>
+                <div data-role="fieldcontain">
+                    <label for="invoice">Invoice #: <sup style="color: orangered">*</sup></label>
+                    <input type="number" value="" name="invoice" required id="invoiceno" /> </div>
+                <div class="ui-field-contain">
+                    <label for="selectCity">Destination:<sup style="color: orangered">*</sup></label>
+                    <select name="selectCity" id="selectCity">
+                        <!-- <option> </option>-->
+                        <option value="Perth">Perth</option>
+                        <option value="Sydney">Sydney</option>
+                        <option value="Melbourne">Melbourne</option>
+                        <option value="Adelaide">Adelaide</option>
+                        <option value="Brisbane">Brisbane</option>
+                    </select>
+                </div> <small id="mandatory-text">* - All fields are mandatory</small>
+                <div class="error-message hide" id="error"> Input is either invalid or empty.. Please check </div>
+             
+                <div class="success-message hide" id="sucess"> Log saved successfully </div>
+                
+                
+<!--                Contact error pop up-->
+         <div data-role="popup" id="alert-contact" data-overlay-theme="b" data-theme="b" data-position-to="window" data-transition="turn" class="popup">
+                <div data-role="header" data-theme="c">
+                    <h1>Alert</h1> </div>
+                <div role="main" class="ui-content">
+                    <h3 class="ui-title">Contact is empty or invalid</h3>
+                    <p><small>Please Enter atleast 1 or more characters... </small></p> <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">OK</a> </div>
+            </div>
+                
+                
+<!--                Invoice error pop up-->
+                
+         <div data-role="popup" id="alert-invoice" data-overlay-theme="b" data-theme="b" data-position-to="window" data-transition="turn" class="popup">
+                <div data-role="header" data-theme="b">
+                    <h1>Alert</h1> </div>
+                <div role="main" class="ui-content">
+                    <h3 class="ui-title">Invoice is empty or invalid</h3>
+                    <p><small>Please Enter atleast 1 or more numbers... </small></p> <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">OK</a> </div>
+            </div>
+                
+<!--              Log saved pop up  -->
+                
+         <div data-role="popup" id="log-saved" data-overlay-theme="c" data-theme="c" data-position-to="window" data-transition="turn" class="popup">
+                <div data-role="header" data-theme="c">
+                    <h1>Alert</h1> </div>
+                <div role="main" class="ui-content">
+                    <h3 class="ui-title">Log Saved</h3>
+                    <p><small>Data has been stored in Local Storage </small></p> <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">OK</a> </div>
+            </div>
+                
+                
+                
+                <a>
+                    <button class="btn btn-primary" onclick="getData()">Save</button>
+                </a>
+                <!--                    <button class="btn btn-primary" onclick="submit()">Save</button>-->
+            </fieldset>
+        </div>
+        <div data-role="footer">
+            <div data-role="controlgroup" data-type="horizontal" class=" ui-btn-left "><a href="#homepage" class="ui-btn  ui-corner-all  ui-btn-icon-left ui-icon-arrow-l nav-but">Previous</a><a href="#logspage" class="ui-btn   ui-corner-all ui-btn-icon-left ui-icon-arrow-r nav-but">Next</a><a href="#homepage" class="ui-btn    ui-corner-all ui-btn-icon-left ui-icon-home nav-but">Home</a>     </div>
+        </div>
+    </div>
+    <div data-role="page" data-theme="c" id="logspage">
+        
+             <div data-role="popup" id="log-send" data-overlay-theme="c" data-theme="c" data-position-to="window" data-transition="turn" class="popup">
+                <div data-role="header" data-theme="c">
+                    <h1>Alert</h1> </div>
+                <div role="main" class="ui-content">
+                    <h3 class="ui-title">Sending logs will delete from local database</h3>
+                    <p><small>Do you want to continue.....? </small></p> <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Cancel</a> <a onclick="continued()" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" >Continue</a></div>
+            </div>
+        
+            <div data-role="popup" id="log-send-confirmed" data-overlay-theme="c" data-theme="c" data-position-to="window" data-transition="turn" class="popup">
+                <div data-role="header" data-theme="c">
+                    <h1>Alert</h1> </div>
+                <div role="main" class="ui-content">
+                    <h3 class="ui-title">Logs has been sent</h3>
+                    <p><small>Press ok to continue.. </small></p> <a onclick="confirm()" href="#homepage" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" >OK</a> </div>
+            </div>
+        
+        
+        <div data-role="header">
+            <div class="ui-grid-b overide-color" style="text-align: center">
+                <div class="ui-block-a overide-color">
+                    <a href="#formpage">
+                        <button id="clears"> Back </button>
+                    </a>
+                </div>
+                <div class="ui-block-b overide-color">
+                    <button id="loggedcityname"></button>
+                </div>
+                <div class="ui-block-c" overide-color>
+                    <!--                    <a href="#dialogbox" data-rel="dialog">Save </a>-->
+                    <a onclick="sendLogs()"  class="logs"  >
+                        <button id="sendLogs" > Send </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div data-role="content" data-theme="a">
+            <h2>Log Entries</h2>
+               <div class="error-message hide" id="log-error"> No log has been recorded, Enter atleast one record </div>
+            <table style="color: black;">
+                <thead>
+                    <tr>
+                       
+                        <th>Contact</th>
+                        <th>Invoice Number</th>
+                        <th>Destination</th>
+                        <th>Date & Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--    Dialog page -->
+    <div data-role="page" id="dialogbox">
+                        
+    
+        
+        
+        
+        <div id="switch-pop-up">
+            <div data-role="header">
+                <h2>Confirm..?</h2> </div>
+            <div data-role="content">
+                <div class="text"> Sending logs will clear the data. </div>
+                <a href="#homepage" data-rel="back">
+                    <button class="btn btn-danger adjust-width"> Back </button>
+                </a>
+                <a>
+                    <button onclick="yes()" class="btn btn-primary adjust-width"> Yes </button>
+                </a>
+            </div>
+            <div data-role="footer">
+                <p style="display: hidden"><small>Make sure to hit the correct button</small></p>  </div>
+            
+        </div>
+        
+        <div class="success-message hide" id="sucess-log">
+            <div data-role="header">
+                <h2>Success</h2> </div>
+            <div data-role="content">
+                <div class="text"> Sent </div>
+
+                <a href="#homepage">
+                    <button  class="btn btn-primary adjust-width" onclick="ok()"> OK </button>
+                </a>
+            </div>
+            <div data-role="footer">
+               Great Work </div>
+        </div>
+    </div>
+
+    <script src="scripts/script.js"></script>
+</body>
+
+</html>

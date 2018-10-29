@@ -1,0 +1,91 @@
+
+/*Pop up content related*/
+.popup{
+    position: absolute;
+    top: -250px;
+    left: -200px;
+    width: 400px;
+    height: 200px;
+}
+/*Alerts styles */
+.sucess-text,.failure-text{
+    font-size: 140%;
+    padding: 40px;
+}
+
+.failed-text-header{
+    color: red;
+    
+}
+sup{
+    color: red;
+}
+
+
+/*//Home page log*/
+.logs{
+    text-decoration: none;
+    color: black;
+}
+
+/*Table log data*/
+#log{
+    text-decoration: none;
+    list-style: none;
+    text-align: center
+}
+
+
+/*Table in show logs*/
+#table-log {
+    
+    max-width: 100%;
+}
+
+#table-log td, #customers th {
+    border: 0px solid #ddd;
+    padding: 8px;
+    font-size: 110%;
+}
+
+#table-log tr:nth-child(even){background-color: #f0f0f0;}
+
+#table-log tr:hover {background-color: #ddd;}
+
+#table-log th {
+
+    padding: 12px;
+    text-align: center;
+    background-color: orangered;
+    color: white;
+ 
+}
+table{
+    max-width: 100%;
+    width: 100%;
+    text-align: center
+}
+
+.okbutton{
+  color: greenyellow
+}
+.align{
+    width: 45% !important;
+    float: left;
+    background-color: orange;
+    padding: 2%;
+    margin-left: 3%
+}
+#logdatapopup{
+    height: 250px !important
+}
+.adjust-font{
+    font-size: 110% !important
+}
+
+.info-text{
+    text-align: center;
+    font-weight: bold;
+    font-size: 130%;
+    color: orangered;
+}

@@ -1,0 +1,123 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+<!--    <title>City Logs</title>-->
+    <!--    Mainpage starts-->
+    <div data-role="page" id="indexpage">
+        <div data-role="header" id="header">
+            <h2>City Data Logger</h2> </div>
+        <div data-role="main" class="ui-content">
+            <ul data-role="listview" data-inset="true" id="citylist">
+                <li onclick="gotocitylog('Perth')"><a href="#inputform" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Perth</a></li>
+                <li onclick="gotocitylog( 'Brisbane')"><a href="#inputform" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Brisbane</a></li>
+                <li onclick="gotocitylog( 'Sydney')"><a href="#inputform" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Sydney</a></li>
+                <li onclick="gotocitylog( 'Melbourne')"><a href="#inputform" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Melbourne</a></li>
+                <li onclick="gotocitylog( 'Adelaide')"><a href="#inputform" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Adelaide</a></li>
+            </ul>
+        </div>
+        <div data-role="footer" id="footer">
+            <h4>&copy; CQUniversity 2018, City Data Logger</h4> </div>
+    </div>
+    <!--    Mainpage ends -->
+    <!--    Form page -->
+    <div data-role="page" id="inputform">
+        <div data-role="header"> <a href="#" class="ui-btn ui-btn-left ui-corner-all ui-shadow " onclick="clearform()">Clear</a> <a onclick="showlog()" href="#citylogspage" class="ui-btn ui-btn-right ui-corner-all ui-shadow " id="show_logs">Show Logs</a>
+            <h1 id="selectedcityname"></h1> </div>
+        <div data-role="main" class="ui-content">
+            <!--            //success pop up-->
+            <div data-role="popup" id="successpopup" data-overlay-theme="b" data-theme="b" data-position-to="window" data-transition="turn" class="popup">
+                <div data-role="header" data-theme="a">
+                    <h1>Log Saved</h1> </div>
+                <div role="main" class="ui-content">
+                    <h3 class="ui-title">You data has been successfully saved</h3>
+                    <p><small>Well done </small></p> <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">OK</a> </div>
+            </div>
+            <!--            // Failure po up-->
+            <div data-role="popup" id="failurepopup" data-overlay-theme="b" data-theme="b" data-position-to="window" data-transition="turn" class="popup">
+                <div data-role="header" data-theme="a">
+                    <h1>Error in  Saving</h1> </div>
+                <div role="main" class="ui-content">
+                    <h3 class="ui-title">Input is either invalid or empty.. Please check</h3>
+                    <p><small>Please retry... </small></p> <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">OK</a> </div>
+            </div>
+            <!--            End of fialure po up-->
+            <div class="ui-field-contain">
+                <div class="ui-field-contain">
+                    <label for="textinput_1">Contact Details:</label>
+                    <input type="text" required name="textinput_1" id="textinput_1" placeholder="Enter Contact Details" value="" data-mini="true"> </div>
+                <div class="ui-field-contain">
+                    <label for="textinput_2">Invoice:</label>
+                    <input type="number" required name="textinput_2" id="textinput_2" placeholder="Enter Invoice number" value="" data-mini="true"> </div>
+                <label for="select_choice_city" class="select"> Destination </label>
+                <select name="select_choice_city" id="select_choice_city">
+                    <option value="">Select Destination City</option>
+                    <option value="Perth">Perth</option>
+                    <option value="Brisbane">Brisbane</option>
+                    <option value="Sydney">Sydney</option>
+                    <option value="Melbourne">Melbourne</option>
+                    <option value="Adelaide">Adelaide</option>
+                </select>
+            </div> <a onclick="save()" data-rel="popup" data-position-to="window" data-transition="pop" data-role="button" data-inline="true" data-theme="a" class="save"> 
+                            Save</a> </div>
+        <div data-role="footer" id="footer">
+            <div data-role="header"> <a href="#indexpage" class="ui-btn  ui-corner-all  ui-btn-icon-left ui-icon-arrow-l">Previous</a> <a onclick="showlog()" href="#citylogspage" class="ui-btn ui-btn-icon-left ui-corner-all ui-shadow ui-icon-arrow-r" id="#show_logs">Next</a>
+                <h1 id="home"> <a href="#indexpage" id="home_button">Home </a></h1> </div>
+            <h3>&copy; CQUniversity 2018, City Data Logger</h3> </div>
+    </div>
+    <!--    //Logs page-->
+    <div data-role="page" id="citylogspage">
+        <div data-role="header" id="header"> <a href="#inputform" class="ui-btn ui-btn-left ui-corner-all ui-shadow ">Go Back</a> <a class="ui-btn ui-btn-right ui-corner-all ui-shadow " id="show_logs" onclick="sendlogdata()">Send Logs</a>
+            <h2>City Logs</h2></div>
+        <div data-role="main" class="ui-content">
+<!--            Send logs pop up warning -->
+             <div data-role="popup" id="sendlogpopup" data-overlay-theme="b" data-theme="b" data-position-to="window" data-transition="turn" class="popup">
+                <div data-role="header" data-theme="a">
+                    <h1>Confirm</h1> </div>
+                <div role="main" class="ui-content">
+                    <h3 class="ui-title">Sending log data will erase data</h3>
+                    <p><small>Are you sure you want to do this..? </small></p> 
+                    <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">No</a>
+                    <a  href="#" onclick="yes_clicked()" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Yes</a> </div>
+            </div>
+            
+<!--            Confirmation of send log data pop up-->
+            
+             <div data-role="popup" id="confirmedpopup" data-overlay-theme="b" data-theme="b" data-position-to="window" data-transition="turn" class="popup">
+                <div data-role="header" data-theme="a">
+                    <h1>Success</h1> </div>
+                <div role="main" class="ui-content">
+                    <h3 class="ui-title">Your data has been sent..</h3>
+                    <p><small>violaaaaaaaaaa.......</small></p> 
+                    <a href="#indexpage" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">OK</a>
+                   </div>
+            </div>
+<!--            Table for shoing log data of the city (selected city only)-->
+            <div class="table_log" id="table_log">
+                <table id="table_content">
+                    <tr>
+                        <th>S.no</th>
+                        <th>City</th>
+                        <th>Contact_details</th>
+                        <th>Invoice</th>
+                        <th>Destination</th>
+                        <th>Date and Time</th>
+                    </tr>
+                    <tr>
+                </table>
+            </div>
+        </div>
+        <div data-role="footer" id="footer">
+            <h4>&copy; CQUniversity 2018, City Data Logger</h4> </div>
+    </div>
+   
+    <script type="text/javascript" src="script.js"></script>
+</body>
+
+</html>

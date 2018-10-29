@@ -1,0 +1,163 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<!--                    Page 1 home page                   -->
+
+<body onload="myFunction()">
+    <div data-role="page" id="page1">
+        <div data-role="header">
+            <h1>City Logs</h1> </div>
+        <div data-role="main" class="ui-content">
+            <ul data-role="listview" id="cities">
+                <ul data-role="listview">
+                    <li onclick="getCity('Perth')"><a href="#takeToForm">Perth</a></li>
+                    <li onclick="getCity('Brisbane')"><a href="#takeToForm">Brisbane</a></li>
+                    <li onclick="getCity('Sydney')"><a href="#takeToForm">Sydney</a></li>
+                    <li onclick="getCity('Melbourne')"><a href="#takeToForm">Melbourne</a></li>
+                    <li onclick="getCity('Adelaide')"><a href="#takeToForm">Adelaide</a></li>
+                </ul>
+            </ul>
+        </div>
+        <div data-role="footer">
+            <h3>&copy; CQuniversity, R Balys 2018 </h3> </div>
+    </div>
+    <!--                    Page 2 Form page                   -->
+    <div data-role="page" id="takeToForm">
+        <!--          Pop up       -->
+        <div data-role="popup" id="errorpopup" data-position-to="window" data-transition="turn" class="popup">
+            <h2>
+                    Inavlid input
+        </h2>
+            <p class="sucess-text adjust-font">Please Check and try</p>
+            <button class="ui-btn ui-shadow ui-corner-all align" onclick="errorok()" style="    margin-top: -20px;
+    margin-left: 88px;"> Ok </button>
+        </div>
+        <div data-role="popup" id="p" data-position-to="window" data-transition="turn" class="popup">
+            <div data-role="header">
+                <h2>
+                            Success
+                    </h2> </div>
+            <p class="sucess-text">Saved successfully</p>
+            <div data-role="footer">
+                <button class="ui-btn ui-shadow ui-corner-all align" onclick="errorok()" style=" margin-top: -20px;
+    margin-left: 88px;"> Ok </button>
+            </div>
+        </div>
+        <div data-role="popup" id="f" data-position-to="window" data-transition="turn" class="popup">
+            <h2 class="failed-text-header">
+                Re-enter
+        </h2>
+            <p class="failure-text">Invalid input. Please re-enter</p>
+        </div>
+        <div data-role="header">
+            <div class="ui-grid-b" style="text-align: center">
+                <div class="ui-block-a">
+                    <button id="clears" onclick="clearData()"> Clear </button>
+                </div>
+                <div class="ui-block-b">
+                    <button id="cityname"></button>
+                </div>
+                <div class="ui-block-c">
+                    <a href="#showLogdata" class="logs">
+                        <button onclick="showLogs()"> Show Logs </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div data-role="main" class="ui-content">
+            <form name="formName">
+                <fieldset>
+                    <div data-role="fieldcontain">
+                        <label for="contact">Contact<sup>*</sup> :</label>
+                        <input type="text" value="" name="contact" required id="contact" /> </div>
+                    <div data-role="fieldcontain">
+                        <label for="invoice">Invoice #<sup>*</sup>:</label>
+                        <input type="number" value="" name="invoice" required id="invoice" /> </div>
+                    <div class="ui-field-contain">
+                        <label for="selectCity">Destination<sup>*</sup>:</label>
+                        <select name="selectCity" id="selectCity">
+                            <!-- <option> </option>-->
+                            <option value="">Select a City</option>
+                            <option value="Perth">Perth</option>
+                            <option value="Brisbane">Brisbane</option>
+                            <option value="Sydney">Sydney</option>
+                            <option value="Melbourne">Melbourne</option>
+                            <option value="Adelaide">Adelaide</option>
+                        </select>
+                    </div>
+                    <input type="button" data-theme="b" name="submit" id="submit" value="Save Log Entry" onclick="submitted()"> </fieldset>
+            </form>
+        </div>
+        <div data-role="footer">
+            <div class="ui-grid-b" style="text-align: center">
+                <div class="ui-block-a ">
+                    <a href="#showLogdata">
+                        <button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-r"> Next </button>
+                    </a>
+                </div>
+                <div class="ui-block-b">
+                    <a href="#page1">
+                        <button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">home</button>
+                    </a>
+                </div>
+                <div class="ui-block-c">
+                    <a href="#page1">
+                        <button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-l"> Prevoius </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    Log page            -->
+    <div data-role="page" id="showLogdata">
+        <div data-role="popup" id="logdatapopup" data-position-to="window" data-transition="turn" class="popup">
+            <h2>
+                    Warning...
+        </h2>
+            <p class="sucess-text adjust-font">Sending data will delete the local data. Are you sure you want to do this..?</p>
+            <button class="ui-btn ui-shadow ui-corner-all align" onclick="ok()"> Yes </button>
+            <button class="ui-btn ui-shadow ui-corner-all align" onclick="cancel()"> Cancel </button>
+        </div>
+        <!--        //success pop up-->
+        <div data-role="popup" id="sucesspopup" data-position-to="window" data-transition="turn" class="popup">
+            <h2>
+                    Success..
+        </h2>
+            <p class="sucess-text">Sent success</p>
+            <a href="#page1">
+                <button class="ui-btn ui-shadow ui-corner-all okbutton"> OK </button>
+            </a>
+        </div>
+        <div data-role="header">
+            <div class="ui-grid-b" style="text-align: center">
+                <div class="ui-block-a ">
+                    <a href="#takeToForm">
+                        <button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-l"> Back </button>
+                    </a>
+                </div>
+                <div class="ui-block-b">
+                    <h3 id="citylogsname">City Logs</h3> </div>
+                <div class="ui-block-c">
+                    <button class="ui-btn ui-shadow ui-corner-all" onclick="sendlogdata()"> send Logs </button>
+                </div>
+            </div>
+        </div>
+        <div data-role="main" class="ui-content">
+            <ul id="log"> </ul>
+        </div>
+        <div id="table-log"></div>
+        <div data-role="footer">
+            <a href="#page1"  style="width: 5%; margin-left: 45%;">
+               Home
+            </a>
+        </div>
+    </div>
+    <script type="text/javascript" src="script.js"></script>
+</body>
+
+</html>

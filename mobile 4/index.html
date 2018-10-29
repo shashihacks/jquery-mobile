@@ -1,0 +1,150 @@
+<html>
+
+<head>
+    <!--    <link rel="stylesheet" href="css/vendor/jquery-mobile.css" />-->
+    <link rel="stylesheet" href="css/style.css" />
+    
+<!--    For local access -->
+    <!--
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/jquery-mobile.js"></script>
+-->
+    
+<!--    //Get latest from cdn-->
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+    <!------------------------       Home page   --------------------->
+    <div data-role="page" id="home">
+        <div data-role="header">
+            <h1> City Logs  </h1> </div>
+        <div data-role="main">
+            <ul data-role="listview" data-inset="false">
+                <li><a onclick="formpage('Perth')" href="#form-entry">Perth</a></li>
+                <li><a onclick="formpage('Sydney')" href="#form-entry">Sydney</a></li>
+                <li><a onclick="formpage('Brisbane')" href="#form-entry">Brisbane</a></li>
+                <li><a onclick="formpage('Melbourne')" href="#form-entry">Melbourne</a></li>
+                <li><a onclick="formpage('Adelaide')" href="#form-entry">Adelaide</a></li>
+            </ul>
+        </div>
+        <div data-role="footer">
+            <h3>&copy; CQUniversity   R, Balsys 2018,   City Information logger application</h3> </div>
+    </div>
+    <!--        ---------Form page apge------------------------->
+    <div data-role="page" id="form-entry">
+        <div data-role="header">
+            <h1 id="data">   </h1> <a href="#" class="ui-btn ui-btn-left ui-corner-all ui-shadow " onclick="reset()">Clear</a> <a href="#logs" class="ui-btn ui-btn-right ui-corner-all ui-shadow " onclick="constructlogs()">Show Logs</a> </div>
+        <div data-role="main" class="ui-content">
+            <!--                --pop up----->
+            <div data-role="popup" id="contact_error" data-overlay-theme="a" data-theme="a" data-position-to="window" data-transition="flip" class="popup">
+                <div data-role="header" data-theme="a">
+                    <h1>Retry..</h1> </div>
+                <div role="main" class="ui-content">
+                    <h3 class="ui-title">Contact field is Inavlid or Empty. Please enter</h3> <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-rel="back">OK</a> </div>
+            </div>
+            <!--            -------Invoice filed------------->
+            <div data-role="popup" id="invoice_error" data-overlay-theme="a" data-theme="a" data-position-to="window" data-transition="slide" class="popup">
+                <div data-role="header" data-theme="a">
+                    <h1>Retry..</h1> </div>
+                <div role="main" class="ui-content">
+                    <h3 class="ui-title">Invoice field is Inavlid or Empty. Please enter</h3> <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-rel="back">OK</a> </div>
+            </div>
+<!--            -----------Something wrong error------------->
+            <div data-role="popup" id="some_error" data-overlay-theme="a" data-theme="a" data-position-to="window" data-transition="slidedown" class="popup">
+                <div data-role="header" data-theme="a">
+                    <h1>Awwww Snapppp..</h1> </div>
+                <div role="main" class="ui-content">
+                    <h3 class="ui-title">Something is Wrong ..!!!!!!!!!!!!</h3> <a href="#home" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" >Go to Home Page</a> </div>
+            </div>
+            
+            
+            
+            
+<!--            --------------Sucess Message---------------->
+                    <div data-role="popup" id="success-msg" data-overlay-theme="a" data-theme="a" data-position-to="window" data-transition="slidedown" class="fade">
+                <div data-role="header" data-theme="a">
+                    <h1>Success Alert</h1> </div>
+                <div role="main" class="ui-content">
+                    <h3 class="ui-title">Your data has been saved. !!</h3> <a href="#home" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-rel="back">Ok</a> </div>
+            </div>
+            
+            
+            
+            <!--            -----------Pop up ends---------->
+            <div id="time" style="text-align: center"> </div>
+            <form>
+                <div id="perthform" class="perthform">
+                    <label for="contact">Contact:</label>
+                    <input type="text" name="contact" required id="contact" class="contact" />
+                    <!--                        //HTML5 Validation as type number-->
+                    <label for="invoice">Invoice #:</label>
+                    <input type="number" name="invoice" required id="invoice" class="invoice" />
+                    <div class="ui-field-contain">
+                        <div>
+                            <label for="Destination">Destination:</label>
+                        </div>
+                        <select name="Destination" id="Destination" data-iconpos="right">
+                            <option value="Perth">Perth</option>
+                            <option value="Sydney">Sydney</option>
+                            <option value="Brisbane">Brisbane</option>
+                            <option value="Melbourne">Melbourne</option>
+                            <option value="Adelaide">Adelaide</option>   </select>
+                    </div>
+                </div>
+            </form> <a onclick="saveEntry()" class="ui-btn  ui-corner-all" id="save-btn">Save Log Entry</a> </div>
+        <div data-role="footer"> <a href="#home" class="ui-btn ui-btn-inline ui-btn-left ">Back</a>
+            <h2><a href="#home" class="home">Home </a></h2> <a href="#logs" class="ui-btn ui-btn-inline ui-btn-right ">Next</a>
+            <h3>&copy; CQUniversity   R, Balsys 2018,   City Information logger application</h3> </div>
+    </div>
+    
+<!--    ------------Logs Page----------------->
+    <div data-role="page" id="logs">
+    
+        <div data-role="header">
+        <h1 id="log_name">City Logs   </h1> <a href="#form-entry" class="ui-btn ui-btn-left ui-corner-all ui-shadow " >Back</a> <a onclick="sendlogger()" class="ui-btn ui-btn-right ui-corner-all ui-shadow">Send Logs</a>
+        </div>
+        <div data-role="main" class="ui-content">
+            
+<!--            //erase log confirmation-->
+            <div data-role="popup" id="erase-log" data-overlay-theme="a" data-theme="a" data-position-to="window" data-transition="slideup" class="fade">
+                <div data-role="header" data-theme="a">
+                    <h1> Alert</h1> </div>
+                <div role="main" class="ui-content">
+                    <h3 class="ui-title">Sending logs will erase all Local data..</h3> <a href="#home" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-rel="back">CANCEL</a><a  class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" onclick="confirmed()">Ok</a> </div>
+            </div>
+            
+            <div data-role="popup" id="success-log" data-overlay-theme="a" data-theme="a" data-position-to="window" data-transition="slidedown" class="fade">
+                <div data-role="header" data-theme="a">
+                    <h1> Success Alert</h1> </div>
+                <div role="main" class="ui-content">
+                    <h3 class="ui-title">Your data hase been sent..........</h3> <a href="#home" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-rel="back">OK</a> </div>
+            </div>
+            
+            
+            <h1>Current Log Entries:</h1>
+            <table id="logtab">
+              <tr style="padding: 20px; !important">
+                <th>City</th>
+                <th>Contact</th> 
+                <th>Invoice Number</th>
+                <th>Destination</th>
+                <th>Time</th>
+              </tr>
+            </table>
+        </div>
+        <diov data-role="footer">
+        <a href="#home" class="home">Home </a>
+        </diov>
+    </div>
+    
+    
+    
+    
+
+    <script type="text/javascript" src="scripts/script.js"></script>
+</body>
+
+</html>

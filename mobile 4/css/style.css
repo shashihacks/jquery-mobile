@@ -1,0 +1,28 @@
+.container {
+    width: 90% !important;
+    margin: 0 auto !important;
+}
+/*//home button as class*/
+.home {
+    font-size: 16px;
+    margin: .5em 0;
+    padding: .7em 1em;
+    display: block;
+    position: relative;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 12.5px;
+    display: inline-block;
+    vertical-align: middle;
+    background-color: #f6f6f6;
+    border-color: #ddd;
+    color: #333;
+    text-shadow: 0 1px 0 #f3f3f3;
+    text-decoration: none;
+}
+
+th( padding:10px !important;
+)

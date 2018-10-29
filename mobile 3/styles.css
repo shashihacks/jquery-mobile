@@ -1,0 +1,39 @@
+#citylist
+{
+    width: 98% !important;
+    margin: 0 auto !important
+}
+.save{
+    width: 100%;
+    
+    
+}
+
+#home,#home_button{
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+  
+}
+#home_button:hover{
+    text-decoration: underline;
+}
+
+
+/*Table css */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {background-color:#f5f5f5;}
+
+#failurepopup{
+    width: 350px !important;
+}
